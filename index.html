@@ -1,0 +1,2992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Geode · GTA5</title>
+
+<!-- =========================================================
+     EMAILJS
+========================================================= -->
+<script
+    type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+
+<script>
+    emailjs.init({
+        publicKey: "YFG3jWhkKRGuH90-y"
+    });
+</script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,
+    "Segoe UI",Roboto,Arial,sans-serif;
+}
+
+:root{
+    --blue:#4c91ff;
+    --purple:#7c5cfc;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:24px;
+    color:#fff;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(48,120,255,.18),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(124,92,252,.18),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            #070d19 0%,
+            #101a2c 50%,
+            #090f1d 100%
+        );
+
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        );
+
+    background-size:45px 45px;
+
+    mask-image:linear-gradient(
+        to bottom,
+        rgba(0,0,0,.8),
+        transparent
+    );
+}
+
+.container{
+    position:relative;
+    width:100%;
+    max-width:900px;
+    min-height:600px;
+
+    padding:38px;
+
+    border-radius:42px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.065),
+            rgba(255,255,255,.025)
+        );
+
+    border:1px solid rgba(255,255,255,.09);
+
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+
+    box-shadow:
+        0 35px 90px rgba(0,0,0,.65),
+        inset 0 1px 0 rgba(255,255,255,.06);
+
+    overflow:hidden;
+}
+
+.container::before{
+    content:"";
+    position:absolute;
+    width:330px;
+    height:330px;
+    border-radius:50%;
+    background:rgba(60,130,255,.10);
+    filter:blur(80px);
+    top:-170px;
+    left:-130px;
+    pointer-events:none;
+}
+
+.container::after{
+    content:"";
+    position:absolute;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    background:rgba(124,92,252,.09);
+    filter:blur(80px);
+    right:-130px;
+    bottom:-130px;
+    pointer-events:none;
+}
+
+.screen{
+    display:none;
+    position:relative;
+    z-index:2;
+}
+
+.screen.active{
+    display:block;
+    animation:fadeUp .4s ease;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(14px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero-visual{
+    position:relative;
+    height:180px;
+    margin-bottom:24px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-glow{
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(72,139,255,.30),
+            rgba(72,139,255,.02) 65%,
+            transparent
+        );
+
+    filter:blur(3px);
+}
+
+.hero-orbit{
+    position:absolute;
+    width:155px;
+    height:155px;
+    border-radius:50%;
+    border:1px solid rgba(100,165,255,.17);
+    transform:rotate(-22deg);
+}
+
+.hero-orbit::before{
+    content:"";
+    position:absolute;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#63a9ff;
+    box-shadow:0 0 18px #63a9ff;
+    top:5px;
+    left:42px;
+}
+
+.hero-main-icon{
+    position:relative;
+
+    width:104px;
+    height:104px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(84,157,255,.25),
+            rgba(47,92,220,.09)
+        );
+
+    border:1px solid rgba(112,178,255,.28);
+
+    box-shadow:
+        0 25px 60px rgba(30,100,255,.23),
+        inset 0 1px 0 rgba(255,255,255,.15);
+
+    transform:rotate(-4deg);
+
+    font-size:3.7rem;
+}
+
+.hero-side{
+    position:absolute;
+
+    width:48px;
+    height:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:15px;
+
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.10);
+
+    font-size:1.35rem;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.25);
+}
+
+.hero-side.left{
+    left:calc(50% - 150px);
+    top:65px;
+    transform:rotate(-8deg);
+}
+
+.hero-side.right{
+    right:calc(50% - 150px);
+    top:40px;
+    transform:rotate(8deg);
+}
+
+h1{
+    text-align:center;
+    font-size:2.25rem;
+    letter-spacing:-.7px;
+    font-weight:750;
+}
+
+.subtitle{
+    text-align:center;
+    color:rgba(255,255,255,.43);
+    font-size:.94rem;
+    margin-top:7px;
+    margin-bottom:30px;
+}
+
+/* =========================================================
+   REGISTER
+========================================================= */
+
+.register-panel{
+    max-width:610px;
+    margin:0 auto;
+}
+
+.form-group{
+    margin-bottom:22px;
+}
+
+.form-label{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    color:rgba(235,243,255,.82);
+
+    font-size:.86rem;
+    font-weight:650;
+
+    margin-bottom:9px;
+}
+
+.label-icon{
+    width:31px;
+    height:31px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(74,145,255,.18),
+            rgba(75,92,255,.06)
+        );
+
+    border:1px solid rgba(90,160,255,.15);
+}
+
+.input-wrap{
+    position:relative;
+}
+
+.input-wrap .input-icon{
+    position:absolute;
+    left:18px;
+    top:50%;
+    transform:translateY(-50%);
+    opacity:.45;
+    font-size:1rem;
+    pointer-events:none;
+}
+
+#nicknameInput{
+    width:100%;
+    height:60px;
+
+    padding:0 18px 0 50px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(120,180,255,.13);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.065),
+            rgba(255,255,255,.025)
+        );
+
+    color:white;
+
+    font-size:1rem;
+    font-weight:500;
+
+    outline:none;
+}
+
+#nicknameInput::placeholder{
+    color:rgba(190,210,240,.28);
+}
+
+#nicknameInput:focus{
+    border-color:#579eff;
+
+    box-shadow:
+        0 0 0 4px rgba(70,145,255,.08),
+        0 12px 35px rgba(35,120,255,.14);
+}
+
+#nicknameInput.error{
+    border-color:#ff6262;
+}
+
+.hint{
+    margin-top:8px;
+    padding-left:3px;
+    color:rgba(180,205,240,.30);
+    font-size:.70rem;
+}
+
+.error-msg{
+    display:none;
+    margin-top:8px;
+    padding:9px 12px;
+    color:#ff8585;
+    background:rgba(255,70,70,.06);
+    border:1px solid rgba(255,70,70,.10);
+    border-radius:11px;
+    font-size:.76rem;
+}
+
+.error-msg.show{
+    display:block;
+}
+
+.platform-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.platform-card{
+    position:relative;
+
+    min-height:86px;
+
+    display:flex;
+    align-items:center;
+    gap:13px;
+
+    padding:15px 16px;
+
+    border-radius:19px;
+
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.07);
+
+    cursor:pointer;
+    transition:.25s ease;
+}
+
+.platform-card:hover{
+    transform:translateY(-2px);
+    border-color:rgba(100,170,255,.25);
+}
+
+.platform-card input{
+    display:none;
+}
+
+.platform-icon{
+    width:47px;
+    height:47px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.06);
+
+    font-size:1.35rem;
+}
+
+.platform-info strong{
+    display:block;
+    color:white;
+    font-size:.95rem;
+}
+
+.platform-info small{
+    display:block;
+    color:rgba(255,255,255,.34);
+    margin-top:3px;
+    font-size:.72rem;
+}
+
+.platform-check{
+    position:absolute;
+    right:13px;
+    top:13px;
+
+    width:18px;
+    height:18px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.16);
+}
+
+.platform-card.selected{
+    background:
+        linear-gradient(
+            135deg,
+            rgba(55,130,255,.12),
+            rgba(70,100,255,.045)
+        );
+
+    border-color:rgba(88,155,255,.35);
+}
+
+.platform-card.selected .platform-check{
+    background:#579eff;
+    border-color:#579eff;
+}
+
+.platform-card.selected .platform-check::after{
+    content:"✓";
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-52%);
+
+    color:white;
+    font-size:11px;
+    font-weight:800;
+}
+
+.btn-primary{
+    width:100%;
+    height:60px;
+
+    margin-top:5px;
+
+    border-radius:19px;
+
+    border:1px solid rgba(170,215,255,.20);
+
+    background:
+        linear-gradient(
+            135deg,
+            #67adff,
+            #407ff1 50%,
+            #315fd1
+        );
+
+    color:white;
+
+    font-size:1rem;
+    font-weight:750;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 15px 35px rgba(45,110,255,.20);
+
+    transition:.25s ease;
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.08);
+}
+
+/* =========================================================
+   CHOOSE
+========================================================= */
+
+.back-btn{
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.09);
+    color:rgba(255,255,255,.55);
+    padding:9px 18px;
+    border-radius:40px;
+    cursor:pointer;
+    font-size:.84rem;
+    margin-bottom:20px;
+}
+
+.toggle-wrap{
+    display:flex;
+
+    padding:6px;
+    margin-bottom:22px;
+
+    background:rgba(255,255,255,.045);
+
+    border:1px solid rgba(255,255,255,.07);
+
+    border-radius:60px;
+}
+
+.toggle-btn{
+    flex:1;
+
+    padding:14px;
+
+    border:none;
+    border-radius:40px;
+
+    background:transparent;
+
+    color:rgba(255,255,255,.45);
+
+    font-size:1.08rem;
+    font-weight:650;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.toggle-btn.active-geode{
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #3789ff,
+            #2d6ce5
+        );
+}
+
+.toggle-btn.active-gta5{
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8b70ff,
+            #6849ed
+        );
+}
+
+.content-block{
+    display:none;
+}
+
+.content-block.active{
+    display:block;
+    animation:fadeUp .35s ease;
+}
+
+/* =========================================================
+   DOWNLOAD CARD
+========================================================= */
+
+.download-card{
+    position:relative;
+
+    padding:25px;
+
+    border-radius:29px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.018)
+        );
+
+    border:1px solid rgba(255,255,255,.07);
+
+    overflow:hidden;
+}
+
+.app-visual{
+    position:relative;
+
+    height:155px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin-bottom:4px;
+}
+
+.app-glow{
+    position:absolute;
+
+    width:130px;
+    height:130px;
+
+    border-radius:50%;
+
+    filter:blur(35px);
+}
+
+.geode-glow{
+    background:rgba(55,135,255,.28);
+}
+
+.gta-glow{
+    background:rgba(124,92,252,.30);
+}
+
+.app-logo{
+    position:relative;
+
+    width:92px;
+    height:92px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:27px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(75,150,255,.23),
+            rgba(50,80,220,.08)
+        );
+
+    border:1px solid rgba(120,180,255,.22);
+
+    font-size:3.2rem;
+}
+
+.gta-logo{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(139,112,255,.24),
+            rgba(90,60,220,.08)
+        );
+
+    border-color:rgba(150,130,255,.25);
+}
+
+.app-title{
+    text-align:center;
+}
+
+.app-title h2{
+    font-size:1.85rem;
+    font-weight:700;
+}
+
+.version{
+    color:rgba(255,255,255,.28);
+    font-size:.78rem;
+    margin-top:3px;
+}
+
+.platform-badges{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin:13px 0 20px;
+}
+
+.badge{
+    padding:6px 10px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.045);
+
+    border:1px solid rgba(255,255,255,.07);
+
+    color:rgba(255,255,255,.50);
+
+    font-size:.70rem;
+}
+
+.download-center{
+    display:flex;
+    justify-content:center;
+}
+
+.btn-download{
+    min-width:230px;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:11px;
+
+    padding:15px 30px;
+
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:60px;
+
+    background:#2d7aff;
+
+    color:white;
+
+    font-size:1rem;
+    font-weight:650;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 28px rgba(45,122,255,.25);
+
+    transition:.25s;
+}
+
+.btn-download:hover{
+    transform:translateY(-2px);
+}
+
+.btn-download.gta5-dl{
+    background:#7c5cfc;
+}
+
+.spinner{
+    display:none;
+
+    width:19px;
+    height:19px;
+
+    border-radius:50%;
+
+    border:2px solid rgba(255,255,255,.12);
+    border-top-color:white;
+
+    animation:spin .8s linear infinite;
+}
+
+.downloading .spinner{
+    display:inline-block;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.thankyou-msg{
+    display:none;
+
+    margin-top:13px;
+
+    padding:12px 15px;
+
+    border-radius:14px;
+
+    background:rgba(0,200,150,.07);
+
+    border:1px solid rgba(0,200,150,.12);
+
+    color:#5ce0b0;
+
+    text-align:center;
+
+    font-size:.82rem;
+}
+
+.thankyou-msg.show{
+    display:block;
+}
+
+/* =========================================================
+   PLATFORM SECTION
+========================================================= */
+
+.platform-section{
+    margin-top:22px;
+
+    padding-top:20px;
+
+    border-top:1px solid rgba(255,255,255,.06);
+}
+
+.section-title{
+    text-align:center;
+
+    color:rgba(255,255,255,.58);
+
+    font-size:.75rem;
+
+    text-transform:uppercase;
+    letter-spacing:.8px;
+
+    margin-bottom:12px;
+}
+
+.platform-preview-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.preview-card{
+    min-height:110px;
+
+    padding:17px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.018)
+        );
+
+    border:1px solid rgba(255,255,255,.07);
+}
+
+.preview-icon{
+    font-size:1.65rem;
+    margin-bottom:8px;
+}
+
+.preview-card strong{
+    display:block;
+    color:white;
+    font-size:.9rem;
+}
+
+.preview-card span{
+    display:block;
+    margin-top:4px;
+    color:rgba(255,255,255,.35);
+    font-size:.70rem;
+}
+
+/* =========================================================
+   UTORRENT
+========================================================= */
+
+.utorrent-section{
+    margin-top:18px;
+
+    padding:16px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(120,201,0,.07),
+            rgba(255,255,255,.025)
+        );
+
+    border:1px solid rgba(120,201,0,.12);
+}
+
+.utorrent-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.utorrent-brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.utorrent-logo{
+    width:48px;
+    height:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #8edc0c,
+            #45a900
+        );
+
+    color:white;
+
+    font-size:1.65rem;
+    font-weight:900;
+}
+
+.utorrent-brand strong{
+    display:block;
+    color:white;
+    font-size:.9rem;
+}
+
+.utorrent-brand small{
+    display:block;
+    margin-top:2px;
+    color:rgba(255,255,255,.35);
+    font-size:.69rem;
+}
+
+.btn-utorrent{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    padding:11px 17px;
+
+    border-radius:50px;
+
+    background:#78c900;
+
+    color:#122000;
+
+    text-decoration:none;
+
+    font-size:.80rem;
+    font-weight:800;
+
+    border:1px solid rgba(210,255,150,.20);
+
+    cursor:pointer;
+}
+
+/* =========================================================
+   INSTRUCTIONS
+========================================================= */
+
+.instruction-box{
+    margin-top:18px;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    background:rgba(0,0,0,.22);
+
+    border:1px solid rgba(255,255,255,.055);
+
+    border-left:4px solid #7c5cfc;
+}
+
+.instruction-title{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    color:#cbd8ff;
+
+    font-size:.92rem;
+    font-weight:650;
+
+    margin-bottom:13px;
+}
+
+.language-block{
+    margin-bottom:16px;
+}
+
+.language-block:last-child{
+    margin-bottom:0;
+}
+
+.language-label{
+    display:inline-flex;
+
+    padding:5px 9px;
+
+    border-radius:7px;
+
+    background:rgba(255,255,255,.055);
+
+    color:rgba(255,255,255,.55);
+
+    font-size:.68rem;
+    font-weight:700;
+
+    margin-bottom:7px;
+}
+
+.instruction-box ol{
+    padding-left:20px;
+
+    color:rgba(255,255,255,.72);
+
+    font-size:.82rem;
+
+    line-height:1.75;
+}
+
+.instruction-box code{
+    padding:3px 7px;
+
+    border-radius:6px;
+
+    background:rgba(255,255,255,.06);
+
+    color:#bcd0ff;
+
+    font-size:.72rem;
+}
+
+/* =========================================================
+   ANDROID
+========================================================= */
+
+.android-blocked{
+    margin-top:20px;
+
+    padding:28px 22px;
+
+    text-align:center;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,70,70,.075),
+            rgba(255,255,255,.018)
+        );
+
+    border:1px solid rgba(255,80,80,.13);
+}
+
+.android-big-icon{
+    width:76px;
+    height:76px;
+
+    margin:0 auto 14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:23px;
+
+    background:rgba(255,70,70,.08);
+
+    font-size:2.4rem;
+}
+
+.android-blocked h3{
+    color:#ff9d9d;
+    font-size:1.1rem;
+}
+
+.android-text{
+    margin-top:14px;
+}
+
+.android-text p{
+    color:rgba(255,255,255,.53);
+
+    font-size:.80rem;
+
+    line-height:1.65;
+
+    margin-bottom:10px;
+}
+
+/* =========================================================
+   SUPPORT BUTTON
+========================================================= */
+
+.support-button{
+    position:fixed;
+
+    right:22px;
+    bottom:22px;
+
+    z-index:9998;
+
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    padding:13px 18px;
+
+    border:none;
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4c91ff,
+            #6b55ed
+        );
+
+    color:white;
+
+    font-size:.84rem;
+    font-weight:750;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 12px 35px rgba(50,100,255,.35);
+
+    transition:.25s;
+}
+
+.support-button:hover{
+    transform:translateY(-3px);
+    filter:brightness(1.08);
+}
+
+/* =========================================================
+   SUPPORT OVERLAY
+========================================================= */
+
+.support-overlay{
+    position:fixed;
+
+    inset:0;
+
+    z-index:9999;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:rgba(3,7,15,.72);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+}
+
+.support-overlay.show{
+    display:flex;
+    animation:overlayIn .2s ease;
+}
+
+@keyframes overlayIn{
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+/* =========================================================
+   SUPPORT MODAL
+========================================================= */
+
+.support-modal{
+    position:relative;
+
+    width:100%;
+    max-width:500px;
+
+    padding:28px;
+
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #121d31,
+            #0b1322
+        );
+
+    border:1px solid rgba(255,255,255,.11);
+
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.65);
+
+    animation:modalIn .25s ease;
+}
+
+@keyframes modalIn{
+    from{
+        opacity:0;
+        transform:translateY(15px) scale(.97);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.support-close{
+    position:absolute;
+
+    right:15px;
+    top:15px;
+
+    width:38px;
+    height:38px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:rgba(255,255,255,.05);
+
+    color:rgba(255,255,255,.7);
+
+    font-size:1.2rem;
+
+    cursor:pointer;
+}
+
+.support-header{
+    margin-bottom:22px;
+}
+
+.support-header-icon{
+    width:54px;
+    height:54px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(76,145,255,.25),
+            rgba(124,92,252,.16)
+        );
+
+    border:1px solid rgba(120,170,255,.20);
+
+    font-size:1.6rem;
+
+    margin-bottom:13px;
+}
+
+.support-header h2{
+    font-size:1.45rem;
+}
+
+.support-header p{
+    color:rgba(255,255,255,.43);
+    font-size:.80rem;
+    margin-top:5px;
+}
+
+.support-field{
+    margin-bottom:15px;
+}
+
+.support-field label{
+    display:block;
+
+    color:rgba(255,255,255,.72);
+
+    font-size:.78rem;
+    font-weight:650;
+
+    margin-bottom:7px;
+}
+
+.support-field input,
+.support-field textarea{
+    width:100%;
+
+    border:1px solid rgba(255,255,255,.09);
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.045);
+
+    color:white;
+
+    outline:none;
+
+    padding:13px 14px;
+
+    font-size:.88rem;
+
+    transition:.2s;
+}
+
+.support-field input{
+    height:48px;
+}
+
+.support-field textarea{
+    min-height:125px;
+    resize:vertical;
+}
+
+.support-field input:focus,
+.support-field textarea:focus{
+    border-color:rgba(82,145,255,.65);
+
+    box-shadow:
+        0 0 0 3px rgba(76,145,255,.08);
+}
+
+.support-field input::placeholder,
+.support-field textarea::placeholder{
+    color:rgba(255,255,255,.25);
+}
+
+.support-send{
+    width:100%;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4c91ff,
+            #6954ec
+        );
+
+    color:white;
+
+    font-size:.90rem;
+    font-weight:750;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 28px rgba(55,115,255,.25);
+
+    transition:.2s;
+}
+
+.support-send:hover{
+    transform:translateY(-1px);
+    filter:brightness(1.08);
+}
+
+.support-send:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+    transform:none;
+}
+
+.support-status{
+    display:none;
+
+    margin-top:12px;
+
+    padding:10px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    font-size:.78rem;
+}
+
+.support-status.success{
+    display:block;
+
+    color:#62e6b5;
+
+    background:rgba(0,200,150,.07);
+
+    border:1px solid rgba(0,200,150,.12);
+}
+
+.support-status.error{
+    display:block;
+
+    color:#ff8d8d;
+
+    background:rgba(255,60,60,.07);
+
+    border:1px solid rgba(255,60,60,.12);
+}
+
+.footer-note{
+    position:relative;
+    z-index:2;
+
+    margin-top:25px;
+
+    padding-top:18px;
+
+    border-top:1px solid rgba(255,255,255,.035);
+
+    text-align:center;
+
+    color:rgba(255,255,255,.16);
+
+    font-size:.68rem;
+
+    letter-spacing:.5px;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:650px){
+
+    body{
+        padding:12px;
+        align-items:flex-start;
+    }
+
+    .container{
+        margin-top:8px;
+        padding:24px 16px;
+        border-radius:30px;
+    }
+
+    .hero-visual{
+        height:145px;
+    }
+
+    .hero-main-icon{
+        width:82px;
+        height:82px;
+        font-size:3rem;
+        border-radius:24px;
+    }
+
+    .hero-orbit{
+        width:125px;
+        height:125px;
+    }
+
+    .hero-side.left{
+        left:12%;
+        top:55px;
+    }
+
+    .hero-side.right{
+        right:12%;
+        top:32px;
+    }
+
+    h1{
+        font-size:1.8rem;
+    }
+
+    .subtitle{
+        font-size:.82rem;
+        margin-bottom:23px;
+    }
+
+    .platform-grid{
+        grid-template-columns:1fr;
+    }
+
+    .toggle-btn{
+        font-size:.92rem;
+        padding:12px 7px;
+    }
+
+    .download-card{
+        padding:18px 14px;
+    }
+
+    .app-visual{
+        height:130px;
+    }
+
+    .app-logo{
+        width:78px;
+        height:78px;
+        font-size:2.7rem;
+    }
+
+    .app-title h2{
+        font-size:1.55rem;
+    }
+
+    .platform-preview-grid{
+        grid-template-columns:1fr;
+    }
+
+    .utorrent-row{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .btn-utorrent{
+        width:100%;
+    }
+
+    .btn-download{
+        width:100%;
+        min-width:0;
+    }
+
+    .support-button{
+        right:14px;
+        bottom:14px;
+
+        padding:12px 16px;
+    }
+
+    .support-modal{
+        padding:22px 17px;
+        border-radius:24px;
+    }
+}
+
+@media(max-width:390px){
+
+    .hero-side{
+        display:none;
+    }
+
+    .container{
+        padding:20px 13px;
+    }
+
+    .download-card{
+        padding:16px 11px;
+    }
+
+    .support-button span:last-child{
+        display:none;
+    }
+
+    .support-button{
+        width:52px;
+        height:52px;
+
+        padding:0;
+
+        justify-content:center;
+
+        font-size:1.25rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="app">
+
+<!-- =========================================================
+     REGISTER SCREEN
+========================================================= -->
+
+<div id="screenRegister" class="screen active">
+
+    <div class="hero-visual">
+
+        <div class="hero-glow"></div>
+        <div class="hero-orbit"></div>
+
+        <div class="hero-side left">🔷</div>
+
+        <div class="hero-main-icon">📦</div>
+
+        <div class="hero-side right">🎮</div>
+
+    </div>
+
+    <h1>🔐 Register</h1>
+
+    <div class="subtitle">
+        Create your profile and choose your platform
+        <br>
+        შექმენი პროფილი და აირჩიე შენი პლატფორმა
+    </div>
+
+    <div class="register-panel">
+
+        <div class="form-group">
+
+            <div class="form-label">
+                <span class="label-icon">👤</span>
+                <span>Nickname / მეტსახელი</span>
+            </div>
+
+            <div class="input-wrap">
+
+                <span class="input-icon">✦</span>
+
+                <input
+                    type="text"
+                    id="nicknameInput"
+                    placeholder="e.g. Player2026"
+                    maxlength="20"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div class="hint">
+                English letters and numbers only · მხოლოდ ინგლისური ასოები და ციფრები
+            </div>
+
+            <div class="error-msg" id="nicknameError">
+                ❌ Only English letters and numbers are allowed.
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <div class="form-label">
+                <span class="label-icon">🖥️</span>
+                <span>Select platform / აირჩიე პლატფორმა</span>
+            </div>
+
+            <div class="platform-grid">
+
+                <label class="platform-card selected" data-platform="windows">
+
+                    <input
+                        type="radio"
+                        name="platform"
+                        value="windows"
+                        checked
+                    >
+
+                    <div class="platform-icon">🖥️</div>
+
+                    <div class="platform-info">
+                        <strong>Windows</strong>
+                        <small>Desktop / PC</small>
+                    </div>
+
+                    <div class="platform-check"></div>
+
+                </label>
+
+                <label class="platform-card" data-platform="android">
+
+                    <input
+                        type="radio"
+                        name="platform"
+                        value="android"
+                    >
+
+                    <div class="platform-icon">📱</div>
+
+                    <div class="platform-info">
+                        <strong>Android</strong>
+                        <small>Phone / Mobile</small>
+                    </div>
+
+                    <div class="platform-check"></div>
+
+                </label>
+
+            </div>
+
+        </div>
+
+        <button class="btn-primary" id="registerBtn">
+            Continue → <span style="opacity:.65;"> / გაგრძელება</span>
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     CHOOSE SCREEN
+========================================================= -->
+
+<div id="screenChoose" class="screen">
+
+    <button class="back-btn" id="backToRegisterBtn">
+        ← Back / უკან
+    </button>
+
+    <h1>📦 Choose</h1>
+
+    <div class="subtitle">
+        Select what you want to download
+        <br>
+        აირჩიე რისი გადმოწერა გინდა
+    </div>
+
+    <div class="toggle-wrap">
+
+        <button
+            id="btnGeode"
+            class="toggle-btn active-geode"
+            type="button"
+            onclick="switchTo('geode')"
+        >
+            🔷 Geode
+        </button>
+
+        <button
+            id="btnGta5"
+            class="toggle-btn"
+            type="button"
+            onclick="switchTo('gta5')"
+        >
+            🎮 GTA5
+        </button>
+
+    </div>
+
+
+    <!-- GEODE -->
+
+    <div id="blockGeode" class="content-block active">
+
+        <div class="download-card">
+
+            <div class="app-visual">
+
+                <div class="app-glow geode-glow"></div>
+
+                <div class="app-logo">
+                    🔷
+                </div>
+
+            </div>
+
+            <div class="app-title">
+
+                <h2>Geode</h2>
+
+                <div class="version">
+                    Version 1.0.0
+                </div>
+
+            </div>
+
+            <div class="platform-badges">
+
+                <span class="badge">🖥️ Windows</span>
+                <span class="badge">📱 Android</span>
+
+            </div>
+
+            <div class="download-center">
+
+                <button
+                    class="btn-download"
+                    type="button"
+                    onclick="startDownload(this,'Geode')"
+                >
+
+                    <span class="btn-icon">⬇️</span>
+
+                    <span class="btn-text">
+                        Download
+                    </span>
+
+                    <span class="spinner"></span>
+
+                </button>
+
+            </div>
+
+            <div
+                class="thankyou-msg"
+                id="thankyouGeode">
+            </div>
+
+            <div class="platform-section">
+
+                <div class="section-title">
+                    Available platforms · ხელმისაწვდომი პლატფორმები
+                </div>
+
+                <div class="platform-preview-grid">
+
+                    <div class="preview-card">
+
+                        <div class="preview-icon">🖥️</div>
+
+                        <strong>Windows</strong>
+
+                        <span>
+                            Desktop version · PC
+                        </span>
+
+                    </div>
+
+                    <div class="preview-card">
+
+                        <div class="preview-icon">📱</div>
+
+                        <strong>Android</strong>
+
+                        <span>
+                            Mobile version · Phone
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- GTA5 -->
+
+    <div id="blockGta5" class="content-block">
+
+        <div class="download-card">
+
+            <div class="app-visual">
+
+                <div class="app-glow gta-glow"></div>
+
+                <div class="app-logo gta-logo">
+                    🎮
+                </div>
+
+            </div>
+
+            <div class="app-title">
+
+                <h2>GTA5 Enhanced</h2>
+
+                <div class="version">
+                    Version 1.0.0 · Portable
+                </div>
+
+            </div>
+
+
+            <!-- WINDOWS -->
+
+            <div id="gta5WindowsContent">
+
+                <div class="platform-badges">
+
+                    <span class="badge">
+                        🖥️ Windows
+                    </span>
+
+                    <span class="badge">
+                        📦 Portable
+                    </span>
+
+                </div>
+
+                <div class="download-center">
+
+                    <button
+                        class="btn-download gta5-dl"
+                        type="button"
+                        onclick="startDownload(this,'GTA5')"
+                    >
+
+                        <span class="btn-icon">⬇️</span>
+
+                        <span class="btn-text">
+                            Download
+                        </span>
+
+                        <span class="spinner"></span>
+
+                    </button>
+
+                </div>
+
+                <div
+                    class="thankyou-msg"
+                    id="thankyouGta5">
+                </div>
+
+
+                <!-- UTORRENT -->
+
+                <div class="utorrent-section">
+
+                    <div class="utorrent-row">
+
+                        <div class="utorrent-brand">
+
+                            <div class="utorrent-logo">
+                                µ
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    µTorrent
+                                </strong>
+
+                                <small>
+                                    Torrent client
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="btn-utorrent"
+                            onclick="downloadWithoutLeavingPage(UTORRENT_URL)"
+                        >
+
+                            <span>↑</span>
+
+                            <span>
+                                Download uTorrent
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- INSTRUCTIONS -->
+
+                <div class="instruction-box">
+
+                    <div class="instruction-title">
+                        📘 Instructions / ინსტრუქცია
+                    </div>
+
+                    <div class="language-block">
+
+                        <div class="language-label">
+                            🇬🇪 ქართული
+                        </div>
+
+                        <ol>
+
+                            <li>
+                                <strong>გადმოწერეთ</strong>
+                                uTorrent.
+                            </li>
+
+                            <li>
+                                <strong>გახსენით</strong>
+                                uTorrent.
+                            </li>
+
+                            <li>
+                                გადმოწერილი
+                                <code>gta5_enhanced-portable.exe</code>
+                                ფაილი გადაიტანეთ uTorrent-ის ფანჯარაში.
+                            </li>
+
+                            <li>
+                                <strong>აირჩიეთ</strong>
+                                საქაღალდე.
+                            </li>
+
+                            <li>
+                                დაელოდეთ ჩამოტვირთვის დასრულებას.
+                            </li>
+
+                        </ol>
+
+                    </div>
+
+                    <div class="language-block">
+
+                        <div class="language-label">
+                            🇬🇧 English
+                        </div>
+
+                        <ol>
+
+                            <li>
+                                <strong>Download</strong>
+                                uTorrent.
+                            </li>
+
+                            <li>
+                                <strong>Open</strong>
+                                uTorrent.
+                            </li>
+
+                            <li>
+                                Drag
+                                <code>gta5_enhanced-portable.exe</code>
+                                into the uTorrent window.
+                            </li>
+
+                            <li>
+                                <strong>Choose</strong>
+                                the destination folder.
+                            </li>
+
+                            <li>
+                                <strong>Wait</strong>
+                                until the download is complete.
+                            </li>
+
+                        </ol>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ANDROID -->
+
+            <div
+                id="gta5AndroidContent"
+                style="display:none;"
+            >
+
+                <div class="android-blocked">
+
+                    <div class="android-big-icon">
+                        🚫
+                    </div>
+
+                    <h3>
+                        Not available on Android
+                    </h3>
+
+                    <div class="android-text">
+
+                        <p>
+                            🇬🇪 სამწუხაროდ, ამჟამად რეალური GTA5-ის
+                            Android-ზე ჩამოტვირთვა და გაშვება შეუძლებელია.
+                        </p>
+
+                        <p>
+                            🇬🇧 Unfortunately, downloading and running
+                            the real GTA5 on Android is currently unavailable.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="footer-note">
+    Geode · GTA5 — v1.0.0
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     SUPPORT BUTTON
+========================================================= -->
+
+<button
+    class="support-button"
+    type="button"
+    onclick="openSupport()"
+    aria-label="Contact support"
+>
+    🛠️
+    <span>მოგვწერე</span>
+</button>
+
+
+<!-- =========================================================
+     SUPPORT MODAL
+========================================================= -->
+
+<div
+    class="support-overlay"
+    id="supportOverlay"
+    onclick="closeSupportOutside(event)"
+>
+
+    <div
+        class="support-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="supportTitle"
+    >
+
+        <button
+            class="support-close"
+            type="button"
+            onclick="closeSupport()"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+        <div class="support-header">
+
+            <div class="support-header-icon">
+                💬
+            </div>
+
+            <h2 id="supportTitle">
+                Support
+            </h2>
+
+            <p>
+                პრობლემა შეგექმნა? მოგვწერე და დაგეხმარებით.
+            </p>
+
+        </div>
+
+
+        <!-- =====================================================
+             EMAILJS FORM
+
+             IMPORTANT:
+             name attributes must match EmailJS template:
+             name
+             email
+             message
+             platform
+             page
+             time
+        ====================================================== -->
+
+        <form
+            id="supportForm"
+            onsubmit="sendSupportMessage(event)"
+        >
+
+            <div class="support-field">
+
+                <label for="supportName">
+                    👤 სახელი
+                </label>
+
+                <input
+                    id="supportName"
+                    type="text"
+                    name="name"
+                    placeholder="შეიყვანე შენი სახელი"
+                    maxlength="60"
+                    required
+                >
+
+            </div>
+
+
+            <div class="support-field">
+
+                <label for="supportEmail">
+                    📧 Email
+                </label>
+
+                <input
+                    id="supportEmail"
+                    type="email"
+                    name="email"
+                    placeholder="example@gmail.com"
+                    maxlength="120"
+                    required
+                >
+
+            </div>
+
+
+            <div class="support-field">
+
+                <label for="supportMessage">
+                    📝 პრობლემა
+                </label>
+
+                <textarea
+                    id="supportMessage"
+                    name="message"
+                    placeholder="აღწერე რა პრობლემა შეგექმნა..."
+                    maxlength="2000"
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <!-- AUTOMATIC DATA -->
+
+            <input
+                type="hidden"
+                name="platform"
+                id="supportPlatform"
+                value="Windows"
+            >
+
+            <input
+                type="hidden"
+                name="page"
+                id="supportPage"
+                value=""
+            >
+
+            <input
+                type="hidden"
+                name="time"
+                id="supportTime"
+                value=""
+            >
+
+
+            <button
+                class="support-send"
+                id="supportSendButton"
+                type="submit"
+            >
+                📩 გაგზავნა
+            </button>
+
+            <div
+                class="support-status"
+                id="supportStatus"
+            ></div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   DOWNLOAD URLS
+========================================================= */
+
+const DOWNLOAD_URLS = {
+
+    Geode:
+        "https://github.com/aikox123/gta5/releases/download/v1.0.0/Geode-Setup.exe",
+
+    GTA5:
+        "https://github.com/aikox123/gta5/releases/download/v1.0.0/gta5_enhanced-portable.exe"
+
+};
+
+const UTORRENT_URL =
+    "https://github.com/aikox123/toolshub/releases/download/v.1.1.1/utorrent_installer.exe";
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let currentNickname = "";
+let currentPlatform = "windows";
+
+
+/* =========================================================
+   SCREEN MANAGEMENT
+========================================================= */
+
+function showScreen(screenId){
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(screen => {
+            screen.classList.remove("active");
+        });
+
+    document
+        .getElementById(screenId)
+        .classList.add("active");
+}
+
+
+/* =========================================================
+   PLATFORM SELECTION
+========================================================= */
+
+const platformCards =
+    document.querySelectorAll(".platform-card");
+
+platformCards.forEach(card => {
+
+    card.addEventListener("click", function(){
+
+        platformCards.forEach(item => {
+            item.classList.remove("selected");
+        });
+
+        this.classList.add("selected");
+
+        const radio =
+            this.querySelector(
+                'input[type="radio"]'
+            );
+
+        if(radio){
+            radio.checked = true;
+        }
+
+    });
+
+});
+
+
+/* =========================================================
+   REGISTER
+========================================================= */
+
+const nicknameInput =
+    document.getElementById("nicknameInput");
+
+const nicknameError =
+    document.getElementById("nicknameError");
+
+const registerBtn =
+    document.getElementById("registerBtn");
+
+
+function validateNickname(name){
+
+    return /^[A-Za-z0-9]+$/.test(name);
+
+}
+
+
+registerBtn.addEventListener("click", function(){
+
+    const name =
+        nicknameInput.value.trim();
+
+    const selectedPlatform =
+        document.querySelector(
+            'input[name="platform"]:checked'
+        );
+
+    const platform =
+        selectedPlatform
+            ? selectedPlatform.value
+            : "windows";
+
+
+    if(!name){
+
+        nicknameInput.classList.add("error");
+
+        nicknameError.textContent =
+            "❌ Please enter a nickname. / გთხოვ შეიყვანე მეტსახელი.";
+
+        nicknameError.classList.add("show");
+
+        return;
+    }
+
+
+    if(!validateNickname(name)){
+
+        nicknameInput.classList.add("error");
+
+        nicknameError.textContent =
+            "❌ Only English letters and numbers are allowed. / გამოიყენე მხოლოდ ინგლისური ასოები და ციფრები.";
+
+        nicknameError.classList.add("show");
+
+        return;
+    }
+
+
+    nicknameInput.classList.remove("error");
+    nicknameError.classList.remove("show");
+
+
+    currentNickname = name;
+    currentPlatform = platform;
+
+
+    updateGta5Content();
+
+    showScreen("screenChoose");
+
+    switchTo("geode");
+
+});
+
+
+nicknameInput.addEventListener("input", function(){
+
+    if(this.classList.contains("error")){
+
+        this.classList.remove("error");
+
+        nicknameError.classList.remove("show");
+
+    }
+
+});
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+document
+    .getElementById("backToRegisterBtn")
+    .addEventListener("click", function(){
+
+        showScreen("screenRegister");
+
+    });
+
+
+/* =========================================================
+   GTA5 PLATFORM
+========================================================= */
+
+function updateGta5Content(){
+
+    const winContent =
+        document.getElementById(
+            "gta5WindowsContent"
+        );
+
+    const androidContent =
+        document.getElementById(
+            "gta5AndroidContent"
+        );
+
+
+    if(currentPlatform === "windows"){
+
+        winContent.style.display = "block";
+
+        androidContent.style.display = "none";
+
+    }else{
+
+        winContent.style.display = "none";
+
+        androidContent.style.display = "block";
+
+    }
+
+}
+
+
+/* =========================================================
+   GEODE / GTA5 TOGGLE
+========================================================= */
+
+function switchTo(choice){
+
+    const blockGeode =
+        document.getElementById("blockGeode");
+
+    const blockGta5 =
+        document.getElementById("blockGta5");
+
+    const btnGeode =
+        document.getElementById("btnGeode");
+
+    const btnGta5 =
+        document.getElementById("btnGta5");
+
+
+    if(choice === "geode"){
+
+        blockGeode.classList.add("active");
+
+        blockGta5.classList.remove("active");
+
+        btnGeode.className =
+            "toggle-btn active-geode";
+
+        btnGta5.className =
+            "toggle-btn";
+
+    }else{
+
+        blockGta5.classList.add("active");
+
+        blockGeode.classList.remove("active");
+
+        btnGta5.className =
+            "toggle-btn active-gta5";
+
+        btnGeode.className =
+            "toggle-btn";
+
+    }
+
+}
+
+
+/* =========================================================
+   DOWNLOAD WITHOUT LEAVING PAGE
+========================================================= */
+
+function downloadWithoutLeavingPage(url){
+
+    if(!url){
+        return;
+    }
+
+    const iframe =
+        document.createElement("iframe");
+
+    iframe.style.position = "fixed";
+    iframe.style.width = "1px";
+    iframe.style.height = "1px";
+    iframe.style.border = "0";
+    iframe.style.opacity = "0";
+    iframe.style.pointerEvents = "none";
+
+    iframe.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    iframe.src = url;
+
+    document.body.appendChild(iframe);
+
+
+    setTimeout(function(){
+
+        if(iframe.parentNode){
+
+            iframe.parentNode.removeChild(iframe);
+
+        }
+
+    },15000);
+
+}
+
+
+/* =========================================================
+   DOWNLOAD BUTTON
+========================================================= */
+
+function startDownload(btn, appName){
+
+    if(btn.classList.contains("downloading")){
+        return;
+    }
+
+
+    if(
+        currentPlatform === "android" &&
+        appName === "GTA5"
+    ){
+
+        return;
+
+    }
+
+
+    const url =
+        DOWNLOAD_URLS[appName];
+
+
+    if(!url){
+
+        console.error(
+            "Download URL not found:",
+            appName
+        );
+
+        return;
+
+    }
+
+
+    const thankYouId =
+        appName === "Geode"
+            ? "thankyouGeode"
+            : "thankyouGta5";
+
+
+    const thankYouEl =
+        document.getElementById(
+            thankYouId
+        );
+
+
+    thankYouEl.classList.remove("show");
+
+    thankYouEl.textContent = "";
+
+
+    const originalText =
+        btn.innerHTML;
+
+
+    btn.classList.add("downloading");
+
+    btn.innerHTML = `
+        <span>⬇️</span>
+        <span>Preparing...</span>
+        <span class="spinner"
+              style="display:inline-block;">
+        </span>
+    `;
+
+    btn.style.pointerEvents = "none";
+
+
+    setTimeout(function(){
+
+        btn.innerHTML =
+            originalText;
+
+        btn.classList.remove(
+            "downloading"
+        );
+
+        btn.style.pointerEvents =
+            "auto";
+
+
+        const msg =
+            `Thank you ${currentNickname} for downloading ${appName}! / გმადლობ ${currentNickname}, რომ ჩამოტვირთე ${appName}!`;
+
+
+        thankYouEl.textContent =
+            msg;
+
+        thankYouEl.classList.add(
+            "show"
+        );
+
+
+        downloadWithoutLeavingPage(
+            url
+        );
+
+    },3000);
+
+}
+
+
+/* =========================================================
+   SUPPORT MODAL
+========================================================= */
+
+function openSupport(){
+
+    const overlay =
+        document.getElementById(
+            "supportOverlay"
+        );
+
+
+    const platformField =
+        document.getElementById(
+            "supportPlatform"
+        );
+
+
+    platformField.value =
+        currentPlatform === "android"
+            ? "Android"
+            : "Windows";
+
+
+    document.getElementById(
+        "supportPage"
+    ).value =
+        window.location.href;
+
+
+    document.getElementById(
+        "supportTime"
+    ).value =
+        new Date().toLocaleString();
+
+
+    document
+        .getElementById("supportStatus")
+        .className =
+        "support-status";
+
+    document
+        .getElementById("supportStatus")
+        .textContent = "";
+
+
+    overlay.classList.add("show");
+
+}
+
+
+function closeSupport(){
+
+    document
+        .getElementById("supportOverlay")
+        .classList.remove("show");
+
+}
+
+
+function closeSupportOutside(event){
+
+    if(
+        event.target.id ===
+        "supportOverlay"
+    ){
+
+        closeSupport();
+
+    }
+
+}
+
+
+/* =========================================================
+   ESC TO CLOSE SUPPORT
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            closeSupport();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SEND SUPPORT MESSAGE WITH EMAILJS
+========================================================= */
+
+function sendSupportMessage(event){
+
+    event.preventDefault();
+
+
+    const form =
+        document.getElementById(
+            "supportForm"
+        );
+
+    const button =
+        document.getElementById(
+            "supportSendButton"
+        );
+
+    const status =
+        document.getElementById(
+            "supportStatus"
+        );
+
+
+    /*
+       Update automatic information
+       immediately before sending.
+    */
+
+    document.getElementById(
+        "supportPlatform"
+    ).value =
+        currentPlatform === "android"
+            ? "Android"
+            : "Windows";
+
+
+    document.getElementById(
+        "supportPage"
+    ).value =
+        window.location.href;
+
+
+    document.getElementById(
+        "supportTime"
+    ).value =
+        new Date().toLocaleString();
+
+
+    /*
+       Loading state
+    */
+
+    button.disabled = true;
+
+    button.textContent =
+        "⏳ იგზავნება...";
+
+
+    status.className =
+        "support-status";
+
+    status.textContent = "";
+
+
+    /*
+       EmailJS
+    */
+
+    emailjs.sendForm(
+        "service_oh33o63",
+        "template_j67tn2g",
+        form
+    )
+    .then(function(){
+
+        status.className =
+            "support-status success";
+
+        status.textContent =
+            "✅ შეტყობინება წარმატებით გაიგზავნა!";
+
+
+        button.textContent =
+            "✅ გაიგზავნა";
+
+
+        form.reset();
+
+
+        /*
+           Reset automatic fields
+        */
+
+        document.getElementById(
+            "supportPlatform"
+        ).value =
+            currentPlatform === "android"
+                ? "Android"
+                : "Windows";
+
+
+        document.getElementById(
+            "supportPage"
+        ).value =
+            window.location.href;
+
+
+        document.getElementById(
+            "supportTime"
+        ).value =
+            new Date().toLocaleString();
+
+
+        setTimeout(function(){
+
+            button.disabled = false;
+
+            button.textContent =
+                "📩 გაგზავნა";
+
+        },2000);
+
+
+    })
+    .catch(function(error){
+
+        console.error(
+            "EmailJS error:",
+            error
+        );
+
+
+        status.className =
+            "support-status error";
+
+        status.textContent =
+            "❌ ვერ გაიგზავნა. გთხოვ სცადე თავიდან.";
+
+
+        button.disabled = false;
+
+        button.textContent =
+            "📩 გაგზავნა";
+
+    });
+
+}
+
+
+/* =========================================================
+   INITIAL STATE
+========================================================= */
+
+updateGta5Content();
+
+showScreen("screenRegister");
+
+</script>
+
+</body>
+</html>
